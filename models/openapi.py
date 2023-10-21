@@ -1,7 +1,6 @@
 import json
 import requests
 from requests import Response
-import yaml
 
 openapi_url = "https://u245099-b439-7fe6db8e.westb.seetacloud.com:8443/generate"
 openapi_session_id = 0
@@ -9,10 +8,6 @@ openapi_request_output_len = 512
 
 
 class OpenApi:
-    file = open('config/config.yml', 'r')
-    cfg = yaml.load(file, Loader=yaml.FullLoader)
-    print(cfg)
-
     @staticmethod
     # 向服务端请求数据
     def get_streaming_response(prompt: str, stream: bool,
@@ -52,4 +47,3 @@ class OpenApi:
         response = self.get_streaming_response(prompt, False)
         response = json.loads(response.text)
         return response['text']
-

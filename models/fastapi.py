@@ -2,18 +2,18 @@ import json
 import requests
 from requests import Response
 
-openapi_url = "https://u245099-b439-7fe6db8e.westb.seetacloud.com:8443/generate"
-openapi_session_id = 0
-openapi_request_output_len = 512
+modelapi_url = "https://u245099-b628-9c5e9823.westb.seetacloud.com:8443/generate"
+modelapi_session_id = 0
+modelapi_request_output_len = 512
 
 
-class OpenApi:
+class FastAPI:
     @staticmethod
     # 向服务端请求数据
     def get_streaming_response(prompt: str, stream: bool,
-                               api_url: str = openapi_url,
-                               session_id: int = openapi_session_id,
-                               request_output_len: int = openapi_request_output_len,
+                               api_url: str = modelapi_url,
+                               session_id: int = modelapi_session_id,
+                               request_output_len: int = modelapi_request_output_len,
                                sequence_start: bool = True,
                                sequence_end: bool = True,
                                ignore_eos: bool = False) -> Response:

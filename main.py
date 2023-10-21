@@ -1,8 +1,8 @@
-from models.openapi import OpenApi
+from models import FastAPI
 
-openapi = OpenApi()
+llm = FastAPI()
 
-for message in openapi.get_streaming_message("Hi, how are you?"):
+for message in llm.get_streaming_message("Hi, how are you?"):
     print(message, end='')
 
 # print(openapi.get_message("Hi, how are you?"))

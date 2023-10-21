@@ -1,13 +1,18 @@
 import json
-import requests  # HTTP 请求库
-from typing import Iterable, List
+import requests
+from requests import Response
+import yaml
 
 openapi_url = "https://u245099-b439-7fe6db8e.westb.seetacloud.com:8443/generate"
 openapi_session_id = 0
 openapi_request_output_len = 512
 
 
-class openapi:
+class OpenApi:
+    file = open('config/config.yml', 'r')
+    cfg = yaml.load(file, Loader=yaml.FullLoader)
+    print(cfg)
+
     @staticmethod
     # 向服务端请求数据
     def get_streaming_response(prompt: str, stream: bool,
@@ -16,7 +21,7 @@ class openapi:
                                request_output_len: int = openapi_request_output_len,
                                sequence_start: bool = True,
                                sequence_end: bool = True,
-                               ignore_eos: bool = False) -> Iterable[List[str]]:
+                               ignore_eos: bool = False) -> Response:
 
         headers = {'User-Agent': 'Client'}
         data = {
@@ -47,3 +52,4 @@ class openapi:
         response = self.get_streaming_response(prompt, False)
         response = json.loads(response.text)
         return response['text']
+

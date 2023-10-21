@@ -1,6 +1,7 @@
-from models.openapi import openapi
+from models.openapi import OpenApi
 
-openapi = openapi()
+openapi = OpenApi()
+
 for message in openapi.get_streaming_message("Hi, how are you?"):
     print(message, end='')
 

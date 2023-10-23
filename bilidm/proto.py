@@ -1,3 +1,4 @@
+import json
 import struct
 import zlib
 
@@ -41,13 +42,15 @@ class Proto:
         bodyLen = self.packetLen - self.headerLen
         self.body = buf[16:self.packetLen]
         if bodyLen <= 0:
-            print("bodyLen <= 0")
             return
         # if self.ver == 0:
         #     # 这里做回调
         #     print("====> callback:", self.body.decode('utf-8'))
         if self.ver == 2:
             data = zlib.decompress(self.body)
+            data = str(data)
+            data = '{' + data.split('{', 1)[1]
+
             print("callback:", data)
         else:
             return

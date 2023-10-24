@@ -1,18 +1,9 @@
-# ----- 数据清洗要求 -----
-# 剔除弹幕中的不可见字符（包括制表符、换行符等）
-# 将弹幕中的所有英文字符转换为小写
-# 将弹幕中的所有全角字符转换为半角字符
-# 将弹幕中的所有繁体字转换为简体字
-# 将弹幕中大于等于4个的、连续的、相同的中文汉字合并为3个（例如将”啊啊啊啊啊啊“替换为”啊啊啊“）
-# 将弹幕中大于等于4个的、连续的、相同的英文字母或数字合并为3个（例如将”666666“替换为”666“）
-# 将弹幕中大于等于3个的、连续的、相同的标点符号合并为2个（例如将“???”替换为”??“）
 import re
-
 from zhconv import convert
 
 
-def filter_data(source: str):
-    """直播弹幕数据清洗"""
+def data_cleaning(source: str):
+    """弹幕数据清洗"""
     # 剔除制表符(\t)、回车符(\r)、换行符(\n)
     source = source.replace("\t", "").replace("\r", "").replace("\n", "")
     # 将字符串中的英文全部转换为小写
@@ -47,3 +38,6 @@ def Q2B(uchar):
         return uchar
     return chr(inside_code)
 
+
+def data_filter():
+    pass

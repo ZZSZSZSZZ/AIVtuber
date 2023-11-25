@@ -40,4 +40,4 @@ def Q2B(uchar):
 
 
 def data_filter():
-    pass
+    filter_str = '你是一个vtuber，以下是弹幕，如果符合回答要求则输出true，否则输出false，回答要求：要判断有没有问答性，禁止回答带有攻击性的问题，禁止回答带有政治的问题，不要回答不会的问题'

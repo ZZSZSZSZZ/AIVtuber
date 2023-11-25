@@ -1,8 +1,5 @@
-from models import FastAPI
+from models import OpenAI
 
-llm = FastAPI()
+# print(OpenAI().get_message("你是谁"))
 
-for message in llm.get_streaming_message("Hi, how are you?"):
-    print(message, end='')
-
-# print(openapi.get_message("Hi, how are you?"))
+print(OpenAI().get_embeddings("你是谁"))

@@ -12,6 +12,9 @@ class Config:
             self.json = yaml.load(file, Loader=yaml.FullLoader)
         except IOError as e:
             print(e)
+        finally:
+            if file is not None:
+                file.close()
 
     def get_json(self):
         return self.json

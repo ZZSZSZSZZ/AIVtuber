@@ -1,0 +1,4 @@
+openai:
+  openai_chat_url: https://api.openai-hk.com/v1/chat/completions
+  openai_embeddings_url: https://api.openai-hk.com/v1/embeddings
+  openai_key: hk-5lyjq81000006178a2f895dbc6f126d0912d82a3707433a8

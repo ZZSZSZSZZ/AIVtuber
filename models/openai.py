@@ -1,15 +1,19 @@
 import json
 import requests
+from tools import Config
 
 
 class OpenAI:
-    @staticmethod
-    def get_message(content: str, model: str = "gpt-3.5-turbo-1106", temperature: float = 0.4, top_p: float = 0.8,
+    config = Config()
+    config.load_config('config.yml')
+    config = config.get_json()['openai']
+
+    def get_message(self, content: str, model: str = "gpt-3.5-turbo-1106", temperature: float = 0.4, top_p: float = 0.8,
                     presence_penalty: float = 2, frequency_penalty: float = 1):
-        url = "https://api.openai-hk.com/v1/chat/completions"
+        url = self.config['openai_chat_url']
         headers = {
             "Content-Type": "application/json",
-            "Authorization": "Bearer hk-5lyjq81000006178a2f895dbc6f126d0912d82a3707433a8"
+            "Authorization": "Bearer " + self.config['openai_key']
         }
         data = {
             "max_tokens": 1200,
@@ -35,12 +39,11 @@ class OpenAI:
         content = json.loads(result)['choices'][0]['message']['content']
         return content
 
-    @staticmethod
-    def get_embeddings(content: str):
-        url = "https://api.openai-hk.com/v1/embeddings"
+    def get_embeddings(self, content: str):
+        url = self.config['openai_embeddings_url']
         headers = {
             "Content-Type": "application/json",
-            "Authorization": "Bearer hk-5lyjq81000006178a2f895dbc6f126d0912d82a3707433a8"
+            "Authorization": "Bearer " + self.config['openai_key']
         }
         data = {
             "input": content,

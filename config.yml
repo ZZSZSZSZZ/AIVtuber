@@ -1,4 +1,14 @@
-openai:
-  openai_chat_url: https://api.openai-hk.com/v1/chat/completions
-  openai_embeddings_url: https://api.openai-hk.com/v1/embeddings
-  openai_key: hk-5lyjq81000006178a2f895dbc6f126d0912d82a3707433a8
+model:
+  openai:
+    key: hk-5lyjq81000006178a2f895dbc6f126d0912d82a3707433a8
+    chat_url: https://api.openai-hk.com/v1/chat/completions
+    chat_max_tokens: 4096
+    chat_model: gpt-3.5-turbo-1106
+    chat_temperature: 0.4
+    chat_top_p: 0.8
+    chat_presence_penalty: 2
+    chat_frequency_penalty: 1
+    embeddings_url: https://api.openai-hk.com/v1/embeddings
+    embeddings_model: text-embedding-ada-002
+  fastapi:
+    test: null

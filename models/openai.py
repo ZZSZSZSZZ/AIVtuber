@@ -4,24 +4,27 @@ from tools import Config
 
 
 class OpenAI:
-    config = Config()
-    config.load_config('config.yml')
-    config = config.get_json()['openai']
+    # 获取配置文件
+    config = Config().load_config('config.yml')['model']['openai']
 
-    def get_message(self, content: str, model: str = "gpt-3.5-turbo-1106", temperature: float = 0.4, top_p: float = 0.8,
-                    presence_penalty: float = 2, frequency_penalty: float = 1):
-        url = self.config['openai_chat_url']
+    def get_message(self, content: str):
+        """
+        用于获取LLM消息
+        :param content: 问题
+        :rtype: object
+        """
+        url = self.config['chat_url']
         headers = {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + self.config['openai_key']
+            "Authorization": "Bearer " + self.config['key']
         }
         data = {
-            "max_tokens": 1200,
-            "model": model,
-            "temperature": temperature,
-            "top_p": top_p,
-            "presence_penalty": presence_penalty,
-            "frequency_penalty": frequency_penalty,
+            "max_tokens": self.config['chat_max_tokens'],
+            "model": self.config['chat_model'],
+            "temperature": self.config['chat_temperature'],
+            "top_p": self.config['chat_top_p'],
+            "presence_penalty": self.config['chat_presence_penalty'],
+            "frequency_penalty": self.config['chat_frequency_penalty'],
             "messages": [
                 {
                     "role": "system",
@@ -40,14 +43,19 @@ class OpenAI:
         return content
 
     def get_embeddings(self, content: str):
-        url = self.config['openai_embeddings_url']
+        """
+        用于转换文本到词向量
+        :param content: 需要转换的文本
+        :rtype: object
+        """
+        url = self.config['embeddings_url']
         headers = {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + self.config['openai_key']
+            "Authorization": "Bearer " + self.config['key']
         }
         data = {
             "input": content,
-            "model": "text-embedding-ada-002"
+            "model": self.config['embeddings_model']
         }
 
         response = requests.post(url, headers=headers, data=json.dumps(data).encode('utf-8'))

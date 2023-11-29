@@ -1,22 +1,30 @@
 from abc import ABC, abstractmethod
 from document_loaders.document import Document
-from typing import Iterator, List
-
+from typing import Iterator, List, Optional
 
 
 class BaseLoader(ABC):
-    """Interface for loading Documents.
-
-    Implementations should implement the lazy-loading method using generators
-    to avoid loading all Documents into memory at once.
-
-    The `load` method will remain as is for backwards compatibility, but its
-    implementation should be just `list(self.lazy_load())`.
+    """
+    加载文档的接口
     """
 
-    # Sub-classes should implement this method
-    # as return list(self.lazy_load()).
-    # This method returns a List which is materialized in memory.
     @abstractmethod
     def load(self) -> List[Document]:
-        """Load data into Document objects."""
+        """将数据加载到 Document对象中。"""
+
+    def load_and_split(self, text_splitter: Optional[TextSplitter] = None) -> List[Document]:
+        """Load Documents and split into chunks. Chunks are returned as Documents.
+
+        Args:
+            text_splitter: TextSplitter instance to use for splitting documents.
+              Defaults to RecursiveCharacterTextSplitter.
+
+        Returns:
+            List of Documents.
+        """
+        if text_splitter is None:
+            _text_splitter: TextSplitter = RecursiveCharacterTextSplitter()
+        else:
+            _text_splitter = text_splitter
+        docs = self.load()
+        return _text_splitter.split_documents(docs)

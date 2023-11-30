@@ -7,10 +7,11 @@ class OpenAI:
     # 获取配置文件
     config = Config().load_config('config.yml')['model']['openai']
 
-    def get_message(self, content: str):
+    def get_message(self, content: str, prompt: str = config['chat_prompt']):
         """
         用于获取LLM消息
-        :param content: 问题
+        :param content: 问题w
+        :param prompt: 提示词
         :rtype: object
         """
         url = self.config['chat_url']
@@ -28,7 +29,7 @@ class OpenAI:
             "messages": [
                 {
                     "role": "system",
-                    "content": "我希望你扮演一只猫娘Vtuber，现在正在直播，请用一名主播的口吻回答我的问题，每次回话最好不要超过20个字，不要反问，你的名字：6点半。性别：女。性格：非常可爱，俏皮，活泼。知识掌握程度：大学毕业。人物特点：长有毛茸茸的猫耳朵和一个猫尾巴(这是生理自带)，喜欢在一句话的结尾加上喵～。"
+                    "content": prompt
                 },
                 {
                     "role": "user",

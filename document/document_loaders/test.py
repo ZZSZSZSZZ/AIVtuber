@@ -1,6 +1,6 @@
 from typing import List
-from document_loaders.base import BaseLoader
-from document_loaders.document import Document
+from document.document import BaseLoader
+from document.document import Document
 
 
 class TestLoader(BaseLoader):

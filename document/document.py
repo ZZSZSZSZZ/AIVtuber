@@ -7,9 +7,7 @@ class Document(NamedTuple):
     page_content: str
     """用于存储一段文本和相关元数据的类"""
     metadata: dict
-    """Arbitrary metadata about the page content (e.g., source, relationships to other
-            documents, etc.).
-        """
+    """有关页面内容的任意元数据（例如来源、与其他文档的关系等）"""
 
 
 class BaseDocumentTransformer(ABC):
@@ -25,7 +23,6 @@ class BaseDocumentTransformer(ABC):
                 embeddings: Embeddings
                 similarity_fn: Callable = cosine_similarity
                 similarity_threshold: float = 0.95
-
                 class Config:
                     arbitrary_types_allowed = True
 

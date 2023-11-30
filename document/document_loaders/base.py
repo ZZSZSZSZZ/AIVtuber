@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
-from document_loaders.document import Document
-from typing import Iterator, List, Optional
+from document.document import Document
+from typing import List, Optional
 
 
 class BaseLoader(ABC):
